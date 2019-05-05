@@ -57,6 +57,12 @@ export class ShoppingCartComponent implements OnInit {
 
             const shoppingcart = JSON.parse(localStorage.getItem('shoppingcart_1'));
 
+            const userid = JSON.parse(localStorage.getItem('userId'));
+
+            console.log(parseInt(userid));
+
+            shoppingcart.orders.user_id=userid;
+
             this.bs.getAddressFromUser(JSON.parse(localStorage.getItem('userId'))).subscribe( res => {
                 this.addressOrder=res[0].address;
                 shoppingcart.orders.delivery_address = this.addressOrder;

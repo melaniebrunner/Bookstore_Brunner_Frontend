@@ -8,6 +8,7 @@ import {Order} from "../shared/order";
 import {ShoppingCartFactory} from "./shopping-cart-factory";
 import {ActivatedRoute, Router} from "@angular/router";
 import { Orderlog } from "./orderlog";
+import {AuthService} from "../shared/athentication-service";
 
 
 @Injectable()
@@ -21,7 +22,7 @@ export class BookStoreService {
     private cart;
 
 
-    constructor(private http: HttpClient, private router: Router,) {
+    constructor(private http: HttpClient, private router: Router,private authService : AuthService) {
         this.cart= ShoppingCartFactory.empty();
         this.order=OrderFactory.empty();
     }
@@ -95,14 +96,17 @@ export class BookStoreService {
     }
 
     addToShoppingcart (book: Book) {
-        this.order.user_id = JSON.parse(localStorage.getItem('userId'));
 
-        var userid= this.order.user_id;
+        if(this.authService.isLoggedIn()){
+            this.order.user_id = JSON.parse(localStorage.getItem('userId'));
 
-        console.log(parseInt(userid));
-        this.getAddressFromUser(parseInt(this.order.user_id)).subscribe(res=>{
-            this.order.delivery_address = res[0].address;
-        });
+            var userid= this.order.user_id;
+
+            console.log(parseInt(userid));
+            this.getAddressFromUser(parseInt(this.order.user_id)).subscribe(res=>{
+                this.order.delivery_address = res[0].address;
+            });
+        }
 
         let isbnOnIndex = this.booksInShoppingCart.findIndex(i => i.isbn === book.isbn);
         if(this.booksInShoppingCart.length == 0 || isbnOnIndex == -1){
