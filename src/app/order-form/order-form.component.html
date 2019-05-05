@@ -1,0 +1,21 @@
+<h1>Bestellungsformular</h1>
+<form  class="ui large form" [formGroup]="orderForm" (ngSubmit)="submitForm()">
+  <input type="hidden" name="id">
+  <div class="field">
+    <label>State</label>
+    <input formControlName="state">
+  </div>
+  <div class="field">
+    <label>Kommentar</label>
+    <input formControlName="comment">
+  </div>
+  <div class="field">
+    <label>Kommentar vom Admin</label>
+    <input formControlName="comment_admin">
+  </div>
+  <div class="field">
+    <label>Id der Bestellung</label>
+    <input formControlName="order_id">
+  </div>
+  <button type="submit" class="ui button" [disabled]="orderForm.invalid">Speichern</button>
+</form>

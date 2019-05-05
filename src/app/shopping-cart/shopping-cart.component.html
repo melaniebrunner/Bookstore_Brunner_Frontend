@@ -1,0 +1,32 @@
+<h4 class="ui horizontal divider header">
+  <i class="cart icon"></i>
+  Warenkorb
+</h4>
+
+<div class="ui middle aligned selection divided list">
+  <a *ngFor="let book of booksForOrder" class="item bs-cart-list-item"
+     [book]="book">
+  </a>
+</div>
+
+<p *ngIf="booksForOrder && !booksForOrder.length">
+  Es sind keine Bücher vorhanden!
+</p>
+
+<div class="header">
+  Gesamtpreis: <br/>
+  Brutto: {{priceOrder | number:'1.2-5'}} € <br/>
+  Netto: {{priceOrderNetto | number:'1.2'}} € <br/>
+  Mehrwertsteuer: {{salesTax-100}}%<br/><br/>
+ <span *ngIf="authService.isLoggedIn()">Lieferaddresse: {{addressOrder}}</span> <br/><br/>
+</div>
+
+
+<button class="ui tiny green button labeled icon" [routerLink]="['../books']"><i class="search icon"></i> <!---->
+  Weiterstöbern</button>
+
+
+<button *ngIf="authService.isFrontendUser()||!authService.isLoggedIn()" class="ui tiny green button labeled icon" (click)="addOrdertoDatabase()"><i class="cart icon"></i> <!---->
+ Bestellen </button>
+
+

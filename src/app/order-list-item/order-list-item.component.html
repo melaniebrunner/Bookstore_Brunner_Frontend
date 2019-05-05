@@ -1,0 +1,35 @@
+
+<div class="item">
+  <div class="header">Order {{order.id}}</div>
+  <div class="meta">
+    <span class="price">Preis:{{order.gross_amount }} €</span>
+    <span class="stay"> Addresse: {{ addressOrder }}</span>
+  </div>
+  <div class="extra">Status: {{ order.state }}</div> <br/>
+    <span class="ui items">
+      <span>Bücher:</span>
+      <span *ngFor="let book of order.books; last as l">
+        <div class="ui hidden divider"></div>
+        <div class="item">
+          <div class="ui tiny image">
+             <img *ngIf="book?.images"
+                  [src]="book.images[0].url">
+          </div>
+          <div class="content">
+            <div class="header">{{ book.title }}</div>
+            <div class="meta">
+              <span class="price">Preis:{{book.price }} €</span>
+            </div>
+            <div class="description">
+              <p>{{book.description}}</p>
+            </div>
+          </div>
+        </div>
+      </span>
+  </span>
+  <div class="right floated content">
+    <button *ngIf="authService.isLoggedIn() && authService.isBackendUser()" class="ui tiny yellow button labeled icon" [routerLink]="['../admin/order', order?.id]"><i class="write icon"></i>
+      Bestellung bearbeiten</button>
+  </div>
+</div>
+

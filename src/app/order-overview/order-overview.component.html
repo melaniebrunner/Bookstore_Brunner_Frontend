@@ -1,0 +1,40 @@
+
+<h4 class="ui horizontal divider header">
+  <i class="cart icon"></i>
+  Bestellungen
+</h4>
+
+<span>Filter:</span>
+
+  <div class="ui centered horizontal menu">
+      <div *ngIf="authService.isBackendUser()" class="item">
+        Benutzername:<br/>
+        <div class="ui input"> <input type="text" (keyup.enter)="filterForUsername()" id="username" value="username"></div>
+      </div>
+      <div *ngIf="authService.isBackendUser()" class="item">
+        <p>Benutzer-ID:</p>
+        <div class="ui input"> <input type="number" (keyup.enter)="filterForUserId()" id="userId"></div>
+      </div>
+      <div class="item">
+        Filtern nach Status:
+        <div class="menu">
+          <a class="active item"(click)="filterForState(0)">Eingegangen</a>
+          <a class="item"(click)="filterForState(1)">Bezahlt</a>
+          <a class="item"(click)="filterForState(2)">Versendet</a>
+          <a class="item"(click)="filterForState(3)">Storniert</a>
+        </div>
+      </div>
+      <div class="item">
+        Sortieren:
+        <div class="ui small basic icon buttons">
+          <button class="ui button" (click)="sortAsc()"><i class="sort amount up icon"></i></button>
+          <button class="ui button"(click)="sortDesc()" ><i class="sort amount down icon"></i></button>
+        </div>
+      </div>
+  </div>
+
+<div class="ui selection divided list">
+  <span *ngFor="let order of orders" class="item bs-order-list-item"
+     [order]="order" >
+  </span>
+</div>

@@ -1,0 +1,11 @@
+<div class="ui {{isLoggedIn()?'five':'three'}} item tabs menu">
+  <a routerLink="books" routerLinkActive="active" class="item">Bücher</a>
+  <a *ngIf="isFrontendUser()||!isLoggedIn()" routerLink="shoppingcart" routerLinkActive="active" class="item">Warenkorb</a>
+  <a *ngIf="isLoggedIn() && isFrontendUser()" routerLink="orders" routerLinkActive="active" class="item">Meine Bestellungen</a>
+  <a *ngIf="isLoggedIn() && isBackendUser()" routerLink="orders" routerLinkActive="active" class="item">Alle Bestellungen</a>
+  <a *ngIf="isLoggedIn()" routerLink="orderlog" routerLinkActive="active" class="item">Orderlog</a>
+  <a *ngIf="isLoggedIn() && isBackendUser()" routerLink="admin" routerLinkActive="active" class="item">Administration</a>
+  <a routerLink="login" routerLinkActive="active" class="item">{{getLoginLabel()}}</a>
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,12 @@
+<br/>
+<div class="item">
+  <div class="header">Log-Eintrag: {{log.id}} </div>
+  <div class="meta">
+    <div class="state">Status: {{ log.state }}</div>
+    <div class="time">  Zeitpunkt: {{log.updated_at }}</div>
+  </div>
+  <div *ngIf="authService.isBackendUser()" class="extra">Benutzername: {{ log.username }}</div>
+  <div class="description"> Kommentar: {{ log.comment }} </div>
+  <div *ngIf="authService.isBackendUser()" class="description"> Kommentar vom Admin: {{ log.comment_admin }} </div>
+</div>
+<br/>
